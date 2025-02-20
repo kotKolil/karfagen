@@ -1,8 +1,10 @@
 from xml.dom.minidom import parse
 
+
 class Book(object):
 
     def __init__(self, filename, encoding="UTF-8"):
+        self.parsedTextData = None
         self.filename = filename
         self.encoding = encoding
 
@@ -15,6 +17,7 @@ class Book(object):
         self.lang = None
 
     def parse(self):
+        global text_nodes
         document = parse(self.filename)
 
         self.document = document
@@ -31,7 +34,6 @@ class Book(object):
             ]
         self.text_data = text_nodes
         self.parsedTextData = []
-
 
     def loadTagValueFromXML(self, tag_name):
         try:

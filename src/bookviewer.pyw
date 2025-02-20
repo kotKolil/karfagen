@@ -13,6 +13,7 @@ class BookViewer(object):
         self.Book = None
         self.pages = []
         self.appConfig = appConfig
+        self.numOfPages = 1
         self.appStyle = self.appConfig.APP_THEME
 
         # creating and configuring BookViewer window
@@ -54,6 +55,11 @@ class BookViewer(object):
         self.navigationTopPanelLayout.addWidget(self.openFile)
         self.navigationTopPanelLayout.setAlignment(Qt.AlignLeft)
 
+        self.navigationSlider = QSlider(Qt.Horizontal)
+        self.navigationSlider.setMinimum(1)
+        self.navigationSlider.setMaximum(self.numOfPages)
+        self.navigationSlider.sliderReleased.connect(self.renderPageFromSlider)
+
         #creating elements for navigation in Book
         self.navigationBoxLayout = QHBoxLayout()
 
@@ -82,6 +88,7 @@ class BookViewer(object):
         self.navigationBoxLayout.addWidget(self.pageNumberLabel)
         self.navigationBoxLayout.addWidget(self.btn_next)
         self.navigationBoxLayout.addWidget(self.goToPageField)
+        self.navigationBoxLayout.addWidget(self.navigationSlider)
 
         self.navigationBox.setLayout(self.navigationBoxLayout)
 
@@ -106,6 +113,12 @@ class BookViewer(object):
 
     def pageByNumber(self):
         pageNumber = int(self.goToPageField.text())
+        if pageNumber > 0 and pageNumber <= len(self.pages):
+            self.pageNumber = pageNumber
+            self.render_page(pageNumber - 1)
+
+    def renderPageFromSlider(self):
+        pageNumber = self.navigationSlider.value()
         if pageNumber > 0 and pageNumber <= len(self.pages):
             self.pageNumber = pageNumber
             self.render_page(pageNumber - 1)
@@ -209,7 +222,9 @@ class BookViewer(object):
 
             self.content.setWindowTitle(self.Book.title + " " + self.Book.author + " " + "Karfagen Book Viewer")
             self.pages = self.parseBookData()
+            self.numOfPages = len(self.pages)
             self.render_page(self.pageNumber)
+            self.navigationSlider.setMaximum(self.numOfPages)
 
     def show_messagebox(self, text):
         msg = QMessageBox()
