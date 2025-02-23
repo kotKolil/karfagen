@@ -1,5 +1,6 @@
 from src.Book import *
 from src.configParser import *
+from src.settingsWindow import *
 
 from PyQt5.Qt import *
 
@@ -10,6 +11,7 @@ class BookViewer(object):
     def __init__(self, app=QApplication(sys.argv), appConfig = configParser()) -> None:
 
         self.app = app
+        self.app.setStyle(appConfig.WINDOW_STYLE)
         self.Book = None
         self.pages = []
         self.appConfig = appConfig
@@ -50,9 +52,13 @@ class BookViewer(object):
         self.openFile.clicked.connect(self.openFileFunc)
         self.openFile.setFixedWidth(70)
 
+        self.settingsButton = QPushButton(text = "settings")
+        self.settingsButton.clicked.connect(self.settingsWindow)
+
         self.layout.addWidget(self.navigationTopPanel)
 
         self.navigationTopPanelLayout.addWidget(self.openFile)
+        self.navigationTopPanelLayout.addWidget(self.settingsButton)
         self.navigationTopPanelLayout.setAlignment(Qt.AlignLeft)
 
         self.navigationSlider = QSlider(Qt.Horizontal)
@@ -226,11 +232,7 @@ class BookViewer(object):
             self.render_page(self.pageNumber)
             self.navigationSlider.setMaximum(self.numOfPages)
 
-    def show_messagebox(self, text):
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Icon.Error)
-        msg.setText(text)
-        msg.setInformativeText("")
-        msg.setWindowTitle("error")
-        msg.setDetailedText("")
-        msg.exec()
+
+    def settingsWindow(self):
+        self.settingsWindowBase = settingsWindow()
+        self.settingsWindowBase.start()
