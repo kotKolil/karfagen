@@ -1,7 +1,7 @@
 {
     "WINDOW_NAME": "Karfagen",
-    "TEXT_SIZE": 10,
-    "FONT_NAME": "Franklin Gothic Heavy",
+    "TEXT_SIZE": 8,
+    "FONT_NAME": "Jaro Cyrillic",
     "WINDOW_STYLE": "Fusion",
-    "APP_THEME": "black"
+    "APP_THEME": "console"
 }

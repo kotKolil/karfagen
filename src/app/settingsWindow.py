@@ -8,6 +8,7 @@ class settingsWindow(object):
         self.configClass = configParser()
 
         self.settingsWindowBase = QWidget()
+        self.settingsWindowBase.setStyleSheet(self.configClass.APP_THEME)
         self.settingsWindowBase.setWindowTitle("settings")
         self.settingsWindowBase.setWindowIcon(QIcon("./media/karfagen.png"))
         self.settingsWindowBase.setFixedSize(300, 300)
@@ -27,7 +28,7 @@ class settingsWindow(object):
         self.appStyle.setCurrentText(str(self.configClass.WINDOW_STYLE))
 
         self.appTheme = QComboBox()
-        self.appTheme.addItems(["white", "black", "console"])
+        self.appTheme.addItems(["white", "dark", "console"])
         self.appTheme.setCurrentText(str(self.configClass.APP_THEME))
 
         self.saveButton = QPushButton(text="save (needs app reopen)")
