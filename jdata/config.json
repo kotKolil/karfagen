@@ -1,0 +1,9 @@
+{
+    "WINDOW_NAME": "Karfagen",
+    "TEXT_SIZE": 8,
+    "FONT_NAME": "Comic Sans MS",
+    "WINDOW_STYLE": "windowsvista",
+    "APP_THEME": "console",
+    "WINDOW_WIDTH": 400,
+    "WINDOW_HEIGHT": 400
+}

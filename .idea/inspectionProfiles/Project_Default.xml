@@ -1,0 +1,60 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="AlphaUnsortedPropertiesFile" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="DuplicatePropertyInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="EmptyDirectory" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InconsistentLineSeparators" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="IncorrectFormatting" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyArgumentEqualDefaultInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WEAK WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="PyBroadExceptionInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyClassicStyleClassInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ourVersions">
+        <value>
+          <list size="2">
+            <item index="0" class="java.lang.String" itemvalue="2.7" />
+            <item index="1" class="java.lang.String" itemvalue="3.13" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyInterpreterInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyMandatoryEncodingInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyMissingTypeHintsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="W605" />
+          <option value="W292" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+          <option value="N806" />
+          <option value="N812" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyTypeCheckerInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="djangoclipboard.djangoclipboard.urls.app" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="QodanaSanity" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="RestRoleInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnusedDefine" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UseEllipsisInPropertyInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="WrongPropertyKeyValueDelimiter" enabled="true" level="TEXT ATTRIBUTES" enabled_by_default="true" editorAttributes="CONSIDERATION_ATTRIBUTES">
+      <scope name="Project Files" level="TEXT ATTRIBUTES" enabled="true" editorAttributes="CONSIDERATION_ATTRIBUTES" />
+    </inspection_tool>
+  </profile>
+</component>
