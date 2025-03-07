@@ -1,6 +1,7 @@
 import sys
 from xml.dom.minidom import parse
 from PyQt5.Qt import *
+import base64
 
 class Book(object):
 
@@ -43,10 +44,19 @@ class Book(object):
                 else:
                     for ii in node.childNodes:
                         if ii.nodeName == "image":
-                            print(ii.getAttribute('l:href'))
+                            ImageObject = QPixmap.fromImage(self.getImageFromXMLById(ii.getAttribute("l:href")[1:]))
+                            text_nodes.append(ImageObject)
+
         self.text_data = text_nodes
         self.parsedTextData = []
 
+    def getImageFromXMLById(self, imgId):
+        for tag in self.document.getElementsByTagName("binary"):
+            if tag.getAttribute("id") == imgId:
+                img = QImage()
+                binStr = tag.childNodes[0].nodeValue.encode("utf-8")
+                img.loadFromData(binStr)
+                return img
     def loadTagValueFromXML(self, tag_name):
         try:
             tag = self.document.getElementsByTagName(tag_name)[0].childNodes[0].nodeValue
@@ -131,9 +141,17 @@ class Book(object):
         else:
             return [paragraph]
 
-app = QApplication(sys.argv)
-widget = QWidget()
-b = Book("C:\\Users\\Treska\\Documents\\projects\\karfagen\\samples\\sampleWithImage.fb2", "UTF-8", app)
-b.parse()
-widget.show()
-app.exec_()
+if __name__ == "__main__":
+
+    app = QApplication(sys.argv)
+    widget = QWidget()
+    b = Book("C:\\Users\\Treska\\Documents\\projects\\karfagen\\samples\\sampleWithImage.fb2", "UTF-8", app)
+    b.parse()
+    img = QPixmap.fromImage(b.loadTagValueFromXML("img_0"))
+    label = QLabel()
+    label.setPixmap(img.scaledToWidth(500, Qt.SmoothTransformation))
+    layout = QHBoxLayout()
+    layout.addWidget(label)
+    widget.setLayout(layout)
+    widget.show()
+    app.exec_()

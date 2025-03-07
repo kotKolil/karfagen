@@ -1,6 +1,7 @@
 from src.GUI.menus.openFileMenu import *
 from src.GUI.menus.infoMenu import *
 from src.etc.WIndows.settingsWindow import *
+from src.etc.recentFilesParser import *
 
 from PyQt5.Qt import *
 
@@ -22,6 +23,11 @@ class navigationTopPanel(QToolBar):
         self.openSettingsButton = QAction("&settings", self)
         self.openSettingsButton.triggered.connect(self.openSettingsWindow)
         self.addAction(self.openSettingsButton)
+
+        # recentFilesClass = recentFilesMenu(self.app)
+        # self.recentFiles = QAction("&recent files", self)
+        # self.recentFiles.setMenu(recentFilesClass)
+        # self.addAction(self.recentFiles)
 
     def openSettingsWindow(self):
         self.stClass = settingsWindow(self.app)
