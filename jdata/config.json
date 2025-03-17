@@ -1,7 +1,7 @@
 {
     "WINDOW_NAME": "Karfagen",
     "TEXT_SIZE": 8,
-    "FONT_NAME": "Comic Sans MS",
+    "FONT_NAME": "Jaro Cyrillic",
     "WINDOW_STYLE": "windowsvista",
     "APP_THEME": "console",
     "WINDOW_WIDTH": 400,

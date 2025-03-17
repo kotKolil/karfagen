@@ -1,4 +1,6 @@
+import random
 import sys
+import os
 from xml.dom.minidom import parse
 from PyQt5.Qt import *
 import base64
@@ -12,6 +14,10 @@ class Book(object):
         self.parsedTextData = None
         self.filename = filename
         self.encoding = encoding
+
+        os.mkdir("images")
+        self.pathWithImg = os.path.join( os.path.join(os.path.abspath(sys.argv[0])), "images" )
+        print(self.pathWithImg)
 
         self.text_data = None
         self.document = None
@@ -28,24 +34,17 @@ class Book(object):
         self.document = document
         self.genre = self.loadTagValueFromXML("genre")
         self.lang = self.loadTagValueFromXML("lang")
-        self.author = self.loadTagValueFromXML("last-name") + self.loadTagValueFromXML("first-name")
+        self.autor = self.loadTagValueFromXML("last-name") + self.loadTagValueFromXML("first-name")
         self.title = self.loadTagValueFromXML("book-title")
 
         paragraphs = document.getElementsByTagName("section")
         text_nodes = []
         for paragraph in paragraphs:
-            # text_nodes = [
-            #     node.childNodes[0].nodeValue for node in paragraph.childNodes
-            #     if node.nodeName == 'p' and node.childNodes[0].nodeValue
-            # ]
             for node in paragraph.childNodes:
                 if node.nodeName == "p" and node.childNodes[0].nodeValue:
                     text_nodes.append(node.childNodes[0].nodeValue)
-                else:
-                    for ii in node.childNodes:
-                        if ii.nodeName == "image":
-                            ImageObject = QPixmap.fromImage(self.getImageFromXMLById(ii.getAttribute("l:href")[1:]))
-                            text_nodes.append(ImageObject)
+                elif node.nodeName == "image" and node.childNodes[0].nodeValue:
+                    text_nodes.append(self.getImageFromXMLById(node.getAttribute("l:href")[1:]))
 
         self.text_data = text_nodes
         self.parsedTextData = []
@@ -54,9 +53,12 @@ class Book(object):
         for tag in self.document.getElementsByTagName("binary"):
             if tag.getAttribute("id") == imgId:
                 img = QImage()
-                binStr = tag.childNodes[0].nodeValue.encode("utf-8")
-                img.loadFromData(binStr)
-                return img
+                binStr = base64.b64decode(tag.childNodes[0].nodeValue)
+                imgId = random.randint(10**5+1, 10**6)
+                with open( os.path.join( self.pathWithImg,  f'{imgId}.jpg' ), "ab") as file:
+                    file.write(binStr)
+                    file.close()
+                return f"<img src = '{os.path.join( self.pathWithImg,  f'{imgId}.jpg' )}' />"
     def loadTagValueFromXML(self, tag_name):
         try:
             tag = self.document.getElementsByTagName(tag_name)[0].childNodes[0].nodeValue
@@ -80,6 +82,8 @@ class Book(object):
         font_metrics = QFontMetrics(self.app.appFont)
 
         for paragraph in self.text_data:
+
+
             # Split paragraph into lines that fit
 
             paragraph = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + paragraph + "<br>"
@@ -141,17 +145,14 @@ class Book(object):
         else:
             return [paragraph]
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    widget = QWidget()
-    b = Book("C:\\Users\\Treska\\Documents\\projects\\karfagen\\samples\\sampleWithImage.fb2", "UTF-8", app)
-    b.parse()
-    img = QPixmap.fromImage(b.loadTagValueFromXML("img_0"))
-    label = QLabel()
-    label.setPixmap(img.scaledToWidth(500, Qt.SmoothTransformation))
+    window = QWidget()
     layout = QHBoxLayout()
-    layout.addWidget(label)
-    widget.setLayout(layout)
-    widget.show()
+    textarea = QTextBrowser()
+    textarea.setText("<img src = 'C:\\Users\\treska\\Documents\\projects\\karfagen\\assets\karfagen.png' />")
+    layout.addWidget(textarea)
+    window.setLayout(layout)
+    window.show()
     app.exec_()
