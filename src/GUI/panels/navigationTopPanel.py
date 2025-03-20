@@ -24,11 +24,6 @@ class navigationTopPanel(QToolBar):
         self.openSettingsButton.triggered.connect(self.openSettingsWindow)
         self.addAction(self.openSettingsButton)
 
-        # recentFilesClass = recentFilesMenu(self.app)
-        # self.recentFiles = QAction("&recent files", self)
-        # self.recentFiles.setMenu(recentFilesClass)
-        # self.addAction(self.recentFiles)
-
     def openSettingsWindow(self):
         self.stClass = settingsWindow(self.app)
         self.stClass.show()

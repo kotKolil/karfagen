@@ -30,11 +30,11 @@ class openFileMenu(QMenu):
                                                 options=options)
         if files:
             self.app.Book = Book(filename = files[0], encoding = "UTF-8" ,app = self.app)
-            self.app.Book.parse()
-            self.app.content.setWindowTitle(self.app.Book.title + " " + self.app.Book.author + " " +
+            self.app.Book.parses()
+            self.app.content.setWindowTitle(
                                             "Karfagen Book Viewer")
             self.app.pages = self.app.Book.parseBookData()
-            self.app.Book.parse()
+            self.app.Book.parses()
             self.app.numOfPages = len(self.app.pages)
             self.app.render_page(0)
             self.app.navigationBottomPanel.navigationSlider.setMaximum(self.app.numOfPages)

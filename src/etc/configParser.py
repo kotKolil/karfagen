@@ -22,7 +22,6 @@ class configParser:
         self.WINDOW_WIDTH = self.data["WINDOW_WIDTH"]
         self.WINDOW_HEIGHT = self.data["WINDOW_HEIGHT"]
         self.APP_THEME = self.data["APP_THEME"]
-        print(WhiteTheme.style)
         match self.APP_THEME:
             case "white":
                 self.APP_THEME_CSS = WhiteTheme.style

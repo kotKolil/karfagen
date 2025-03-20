@@ -15,9 +15,8 @@ class Book(object):
         self.filename = filename
         self.encoding = encoding
 
-        os.mkdir("images")
-        self.pathWithImg = os.path.join( os.path.join(os.path.abspath(sys.argv[0])), "images" )
-        print(self.pathWithImg)
+        try: os.mkdir("images")
+        except FileExistsError: pass
 
         self.text_data = None
         self.document = None
@@ -27,7 +26,7 @@ class Book(object):
         self.title = None
         self.lang = None
 
-    def parse(self):
+    def parses(self):
         global text_nodes
         document = parse(self.filename)
 
@@ -36,14 +35,15 @@ class Book(object):
         self.lang = self.loadTagValueFromXML("lang")
         self.autor = self.loadTagValueFromXML("last-name") + self.loadTagValueFromXML("first-name")
         self.title = self.loadTagValueFromXML("book-title")
-
         paragraphs = document.getElementsByTagName("section")
         text_nodes = []
         for paragraph in paragraphs:
             for node in paragraph.childNodes:
                 if node.nodeName == "p" and node.childNodes[0].nodeValue:
                     text_nodes.append(node.childNodes[0].nodeValue)
-                elif node.nodeName == "image" and node.childNodes[0].nodeValue:
+                elif node.nodeName == "image":
+                    print("хуй")
+                    print(node.getAttribute("l:href")[1:])
                     text_nodes.append(self.getImageFromXMLById(node.getAttribute("l:href")[1:]))
 
         self.text_data = text_nodes
@@ -52,13 +52,16 @@ class Book(object):
     def getImageFromXMLById(self, imgId):
         for tag in self.document.getElementsByTagName("binary"):
             if tag.getAttribute("id") == imgId:
-                img = QImage()
                 binStr = base64.b64decode(tag.childNodes[0].nodeValue)
+                print(binStr)
                 imgId = random.randint(10**5+1, 10**6)
-                with open( os.path.join( self.pathWithImg,  f'{imgId}.jpg' ), "ab") as file:
+                with open(os.path.join("images", f'{imgId}.jpg'), 'x') as file:
+                    file.close()
+                with open(os.path.join("images", f'{imgId}.jpg'), 'wb') as file:
                     file.write(binStr)
                     file.close()
-                return f"<img src = '{os.path.join( self.pathWithImg,  f'{imgId}.jpg' )}' />"
+                # with open( f'/images/{imgId}.jpg', "wb") as file:
+                return f"<img src = '{os.path.join( "images",  f'{imgId}.jpg' )}' />"
     def loadTagValueFromXML(self, tag_name):
         try:
             tag = self.document.getElementsByTagName(tag_name)[0].childNodes[0].nodeValue
@@ -87,7 +90,6 @@ class Book(object):
             # Split paragraph into lines that fit
 
             paragraph = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + paragraph + "<br>"
-
             lines = self.split_paragraph_into_lines(paragraph, font_metrics, self.app.textLabel.width())
             for line in lines:
                 line_height = font_metrics.height()  # Use actual line height
@@ -148,10 +150,14 @@ class Book(object):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
+    book = Book("C:\\Users\\treska\\Documents\\projects\\karfagen\\samples\\sampleWithImage.fb2", encoding = "UTF-8", app = app)
+    book.parses()
+    app.render_page(0)
+
     window = QWidget()
     layout = QHBoxLayout()
     textarea = QTextBrowser()
-    textarea.setText("<img src = 'C:\\Users\\treska\\Documents\\projects\\karfagen\\assets\karfagen.png' />")
     layout.addWidget(textarea)
     window.setLayout(layout)
     window.show()
