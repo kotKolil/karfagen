@@ -19,6 +19,7 @@ class configParser:
         self.WINDOW_STYLE = self.data["WINDOW_STYLE"]
         self.APP_THEME = self.data["APP_THEME"]
         self.APP_THEME_NAME = self.data["APP_THEME"]
+        self.OPACITY_WINDOWS = self.data["OPACITY_WINDOWS"]
         self.WINDOW_WIDTH = self.data["WINDOW_WIDTH"]
         self.WINDOW_HEIGHT = self.data["WINDOW_HEIGHT"]
         self.APP_THEME = self.data["APP_THEME"]
@@ -40,7 +41,8 @@ class configParser:
             "WINDOW_STYLE": self.WINDOW_STYLE,
             "APP_THEME": self.APP_THEME,
             "WINDOW_WIDTH": self.WINDOW_WIDTH,
-            "WINDOW_HEIGHT": self.WINDOW_HEIGHT
+            "WINDOW_HEIGHT": self.WINDOW_HEIGHT,
+            "OPACITY_WINDOWS" : self.OPACITY_WINDOWS
         }
         with open("./jdata/config.json", "w") as file:
             json.dump(data, file, indent=4)

@@ -25,7 +25,7 @@ class bookViewer(QApplication):
         self.content.setAttribute(Qt.WA_AcceptTouchEvents, True)
         self.content.installEventFilter(self)
         self.content.setMouseTracking(True)
-        self.content.setWindowOpacity(0.8)
+        self.content.setWindowOpacity(self.appConfig.OPACITY_WINDOWS)
         self.content.setStyle(appConfig.APP_THEME_СSS)
         self.content.resize(0, 0)
         self.content.setFixedWidth(self.appConfig.WINDOW_WIDTH)

@@ -15,6 +15,13 @@ class settingsWindow(QWidget):
         self.setWindowIcon(QIcon("./assets/karfagen.png"))
         self.setFixedSize(400, 400)
 
+        self.opacitySlider = QSlider(Qt.Horizontal)
+        self.opacitySlider.setMinimum(1)
+        self.opacitySlider.setMaximum(10)
+        self.opacitySlider.sliderReleased.connect(self.updateOpacity)
+
+        self.opacityLabel = QLabel(text=f"opacity is {self.configClass.OPACITY_WINDOWS}")
+
         self.settingsWindowBaseLayout = QVBoxLayout()
 
         self.textSizeField = QLineEdit()
@@ -48,6 +55,8 @@ class settingsWindow(QWidget):
         self.settingsWindowBaseLayout.addWidget(self.windowWidth)
         self.settingsWindowBaseLayout.addWidget(QLabel(text="window height"))
         self.settingsWindowBaseLayout.addWidget(self.windowHeight)
+        self.settingsWindowBaseLayout.addWidget(self.opacityLabel)
+        self.settingsWindowBaseLayout.addWidget(self.opacitySlider)
         self.settingsWindowBaseLayout.addWidget(QLabel(text="text size"))
         self.settingsWindowBaseLayout.addWidget(self.textSizeField)
         self.settingsWindowBaseLayout.addWidget(QLabel(text="font name"))
@@ -67,5 +76,10 @@ class settingsWindow(QWidget):
         self.configClass.WINDOW_HEIGHT = int(self.windowHeight.text())
         self.configClass.WINDOW_WIDTH = int(self.windowWidth.text())
         self.configClass.APP_THEME = self.appTheme.currentText()
+        self.configClass.OPACITY_WINDOWS = self.opacitySlider.value() / 10
         self.configClass.save()
         self.close()
+
+    def updateOpacity(self):
+        value = self.opacitySlider.value()
+        self.opacityLabel.setText(f"opacity is {value/10}")

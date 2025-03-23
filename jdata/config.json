@@ -3,7 +3,8 @@
     "TEXT_SIZE": 13,
     "FONT_NAME": "Trebuchet MS",
     "WINDOW_STYLE": "windowsvista",
-    "APP_THEME": "white",
+    "APP_THEME": "console",
     "WINDOW_WIDTH": 666,
-    "WINDOW_HEIGHT": 666
+    "WINDOW_HEIGHT": 666,
+    "OPACITY_WINDOWS": 0.1
 }
