@@ -1,9 +1,9 @@
 {
     "WINDOW_NAME": "Karfagen",
-    "TEXT_SIZE": 8,
-    "FONT_NAME": "Jaro Cyrillic",
+    "TEXT_SIZE": 13,
+    "FONT_NAME": "Trebuchet MS",
     "WINDOW_STYLE": "windowsvista",
-    "APP_THEME": "console",
-    "WINDOW_WIDTH": 400,
-    "WINDOW_HEIGHT": 400
+    "APP_THEME": "white",
+    "WINDOW_WIDTH": 666,
+    "WINDOW_HEIGHT": 666
 }

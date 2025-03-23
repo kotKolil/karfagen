@@ -21,6 +21,11 @@ class bookViewer(QApplication):
 
         # creating and configuring bookViewer window
         self.content = QWidget()
+        self.content.setAcceptDrops(True)
+        self.content.setAttribute(Qt.WA_AcceptTouchEvents, True)
+        self.content.installEventFilter(self)
+        self.content.setMouseTracking(True)
+        self.content.setWindowOpacity(0.8)
         self.content.setStyle(appConfig.APP_THEME_СSS)
         self.content.resize(0, 0)
         self.content.setFixedWidth(self.appConfig.WINDOW_WIDTH)
@@ -59,3 +64,25 @@ class bookViewer(QApplication):
             self.navigationBottomPanel.navigationSlider.setValue(pageNumber)
             self.pageNumber = pageNumber
             self.render_page(pageNumber - 1)
+
+    def closeEvent(self, event):
+        print("cock")
+        for filename in os.listdir("./images"):
+            file_path = os.path.join("./images", filename)
+            # Check if it's a file
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+        event.accept()
+
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.acceptProposedAction()
+
+    def dropEvent(self, event):
+        for url in event.mimeData().urls():
+            file_path = url.toLocalFile()
+            if file_path.endswith(('.txt', '.epub', '.fb2')):
+                print("cock")
+        event.acceptProposedAction()
+
+

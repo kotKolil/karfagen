@@ -30,10 +30,12 @@ class recentFilesMenu(QMenu):
     def openFile(self, filename):
         self.app.Book = Book(filename=filename, encoding="UTF-8", app=self.app)
         self.app.Book.parses()
-        self.app.content.setWindowTitle(self.app.Book.title + " " + self.app.Book.author + " " +
-                                        "Karfagen Book Viewer")
+        self.app.content.setWindowTitle("Karfagen Book Viewer")
         self.app.pages = self.app.Book.parseBookData()
         self.app.Book.parses()
         self.app.numOfPages = len(self.app.pages)
         self.app.render_page(0)
         self.app.navigationBottomPanel.navigationSlider.setMaximum(self.app.numOfPages)
+
+    def dropEvent(self, event):
+        pass

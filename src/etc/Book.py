@@ -4,6 +4,8 @@ import os
 from xml.dom.minidom import parse
 from PyQt5.Qt import *
 import base64
+from PIL import Image
+import io
 
 class Book(object):
 
@@ -53,13 +55,23 @@ class Book(object):
         for tag in self.document.getElementsByTagName("binary"):
             if tag.getAttribute("id") == imgId:
                 binStr = base64.b64decode(tag.childNodes[0].nodeValue)
-                print(binStr)
                 imgId = random.randint(10**5+1, 10**6)
                 with open(os.path.join("images", f'{imgId}.jpg'), 'x') as file:
                     file.close()
-                with open(os.path.join("images", f'{imgId}.jpg'), 'wb') as file:
-                    file.write(binStr)
-                    file.close()
+                buf = io.BytesIO(binStr)
+                image = Image.open(buf)
+                new_width = int(self.app.appConfig.WINDOW_WIDTH * 0.7) if image.width >=  self.app.appConfig.WINDOW_WIDTH else \
+                    image.width
+                new_height = int(self.app.appConfig.WINDOW_HEIGHT * 0.7) if image.height >=  self.app.appConfig.WINDOW_HEIGHT else \
+                    image.height
+                resized_image = image.resize((new_width, new_height))
+
+                # Save the resized image
+                resized_image.save(os.path.join("images", f'{imgId}.jpg'))
+                # with open(os.path.join("images", f'{imgId}.jpg'), 'wb') as file:
+                #     file.write(binStr)
+                #     file.close()
+
                 # with open( f'/images/{imgId}.jpg', "wb") as file:
                 return f"<img src = '{os.path.join( "images",  f'{imgId}.jpg' )}' />"
     def loadTagValueFromXML(self, tag_name):
