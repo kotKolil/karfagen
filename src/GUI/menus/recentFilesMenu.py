@@ -1,9 +1,6 @@
-import json
-import os
-
 from src.etc.Book import *
-from src.etc.recentFilesParser import *
-
+from src.etc.Recentfilesparser import *
+from functools import partial
 
 class recentFilesMenu(QMenu):
 
@@ -13,21 +10,17 @@ class recentFilesMenu(QMenu):
 
         self.app = app
 
-        data = recentFilesParser()
+        data = Recentfilesparser()
         if len(data.data["recentFiles"]) == 0:
-            entries = os.listdir("./samples/")
-            for filenames in [os.path.join("./samples/", entry) for entry in entries if
-                              os.path.isfile(os.path.join("./samples/", entry))]:
-                ii = QAction(os.path.basename(filenames), self)
-                ii.triggered.connect(lambda filename=filenames: self.openFile(filenames))
-                self.addAction(ii)
+            pass
         else:
-            for filenames in data.data["recentFiles"]:
-                ii = QAction(os.path.basename(filenames), self)
-                ii.triggered.connect(lambda filename=filenames: self.openFile(filenames))
+            for filename in data.data["recentFiles"]:
+                ii = QAction(os.path.basename(filename), self)
+                ii.triggered.connect(partial(self.openFile, filename))
                 self.addAction(ii)
 
     def openFile(self, filename):
+        print(filename)
         self.app.Book = Book(filename=filename, encoding="UTF-8", app=self.app)
         self.app.Book.parses()
         self.app.content.setWindowTitle("Karfagen Book Viewer")

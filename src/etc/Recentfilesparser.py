@@ -1,6 +1,6 @@
 import json
 
-class recentFilesParser:
+class Recentfilesparser:
 
     def __init__(self):
         self.data = json.load(open("./jdata/recentFiles.json", encoding="UTF-8"))

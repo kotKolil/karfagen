@@ -1,6 +1,6 @@
 from PyQt5.Qt import *
 
-class readmeWindow(QWidget):
+class ReadmeWindow(QWidget):
 
     def __init__(self):
         super().__init__()

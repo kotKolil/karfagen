@@ -1,7 +1,7 @@
 from src.GUI.menus.openFileMenu import *
 from src.GUI.menus.infoMenu import *
-from src.etc.WIndows.settingsWindow import *
-from src.etc.recentFilesParser import *
+from src.etc.WIndows.SettingsWindow import *
+from src.etc.Recentfilesparser import *
 
 from PyQt5.Qt import *
 
@@ -25,5 +25,5 @@ class navigationTopPanel(QToolBar):
         self.addAction(self.openSettingsButton)
 
     def openSettingsWindow(self):
-        self.stClass = settingsWindow(self.app)
+        self.stClass = SettingsWindow(self.app)
         self.stClass.show()

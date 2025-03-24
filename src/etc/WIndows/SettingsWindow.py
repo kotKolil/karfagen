@@ -1,7 +1,7 @@
 from PyQt5.Qt import *
 from src.etc.configParser import *
 
-class settingsWindow(QWidget):
+class SettingsWindow(QWidget):
 
     def __init__(self, app):
 

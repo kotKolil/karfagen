@@ -8,25 +8,21 @@ import sys
 
 
 class bookViewer(QApplication):
-    def __init__(self, appConfig=configParser()) -> None:
+    def __init__(self, app_config=configParser()) -> None:
         super().__init__(sys.argv)
-        self.setStyleSheet(appConfig.APP_THEME_CSS)
+        self.setStyleSheet(app_config.APP_THEME_CSS)
 
         self.Book = None
         self.pages = []
-        self.appConfig = appConfig
+        self.appConfig = app_config
         self.numOfPages = 1
-        self.appStyle = self.appConfig.APP_THEME_СSS
+        self.appStyle = self.appConfig.APP_THEME_CSS
         self.pageNumber = 0
 
         # creating and configuring bookViewer window
         self.content = QWidget()
-        self.content.setAcceptDrops(True)
-        self.content.setAttribute(Qt.WA_AcceptTouchEvents, True)
-        self.content.installEventFilter(self)
-        self.content.setMouseTracking(True)
         self.content.setWindowOpacity(self.appConfig.OPACITY_WINDOWS)
-        self.content.setStyle(appConfig.APP_THEME_СSS)
+        self.content.setStyleSheet(app_config.APP_THEME_CSS)
         self.content.resize(0, 0)
         self.content.setFixedWidth(self.appConfig.WINDOW_WIDTH)
         self.content.setFixedHeight(self.appConfig.WINDOW_HEIGHT)
@@ -64,19 +60,6 @@ class bookViewer(QApplication):
             self.navigationBottomPanel.navigationSlider.setValue(pageNumber)
             self.pageNumber = pageNumber
             self.render_page(pageNumber - 1)
-
-    def closeEvent(self, event):
-        print("cock")
-        for filename in os.listdir("./images"):
-            file_path = os.path.join("./images", filename)
-            # Check if it's a file
-            if os.path.isfile(file_path):
-                os.remove(file_path)
-        event.accept()
-
-    def dragEnterEvent(self, event):
-        if event.mimeData().hasUrls():
-            event.acceptProposedAction()
 
     def dropEvent(self, event):
         for url in event.mimeData().urls():

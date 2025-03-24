@@ -1,5 +1,5 @@
 from src.GUI.menus.recentFilesMenu import *
-from src.etc.recentFilesParser import *
+from src.etc.Recentfilesparser import *
 
 class openFileMenu(QMenu):
     def __init__(self, app):
@@ -7,7 +7,7 @@ class openFileMenu(QMenu):
         super().__init__()
 
         self.app = app
-        self.recentFilesParser = recentFilesParser()
+        self.recentFilesParser = Recentfilesparser()
 
         openFile = QAction("&open file", self.app)
         openFile.triggered.connect(self.openFileFunc)

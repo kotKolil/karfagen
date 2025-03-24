@@ -44,8 +44,6 @@ class Book(object):
                 if node.nodeName == "p" and node.childNodes[0].nodeValue:
                     text_nodes.append(node.childNodes[0].nodeValue)
                 elif node.nodeName == "image":
-                    print("хуй")
-                    print(node.getAttribute("l:href")[1:])
                     text_nodes.append(self.getImageFromXMLById(node.getAttribute("l:href")[1:]))
 
         self.text_data = text_nodes
@@ -132,6 +130,7 @@ class Book(object):
             A list of strings, where each string is a line.
         """
 
+        global newString, i
         if font_metrics.horizontalAdvance(paragraph) >= self.app.textLabel.width():
 
             words = paragraph.split()

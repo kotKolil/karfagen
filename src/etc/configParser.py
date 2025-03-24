@@ -8,11 +8,11 @@ from src.GUI.styles.SepiaTheme import *
 
 class configParser:
 
-    def __init__(self, configName="./jdata/config.json", encoding="utf-8"):
-        self.data = json.load(open(configName, encoding=encoding))
+    def __init__(self, config_name="./jdata/config.json", encoding="utf-8"):
+        self.data = json.load(open(config_name, encoding=encoding))
 
         self.APP_THEME = None
-        self.APP_THEME_СSS = None
+        self.APP_THEME_CSS = None
         self.WINDOW_NAME = self.data["WINDOW_NAME"]
         self.TEXT_SIZE = self.data["TEXT_SIZE"]
         self.FONT_NAME = self.data["FONT_NAME"]

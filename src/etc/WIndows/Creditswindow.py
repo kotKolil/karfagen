@@ -1,17 +1,17 @@
 from PyQt5.Qt import *
 
-class creditsWindow(QWidget):
+class CreditWindow(QWidget):
 
     def __init__(self):
         super().__init__()
         self.setWindowTitle("credits")
 
-        windowLayout = QHBoxLayout()
+        window_layout = QHBoxLayout()
         self.text = QLabel()
         self.text.setText("2025 by Treska")
 
-        windowLayout.addWidget(self.text)
+        window_layout.addWidget(self.text)
 
-        self.setLayout(windowLayout)
+        self.setLayout(window_layout)
 
 

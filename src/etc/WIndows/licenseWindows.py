@@ -1,6 +1,6 @@
 from PyQt5.Qt import *
 
-class licenceWindow(QWidget):
+class LicenceWindow(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -14,12 +14,12 @@ class licenceWindow(QWidget):
 
         self.setWindowTitle("license")
 
-        windowLayout = QHBoxLayout()
+        window_layout = QHBoxLayout()
         self.text = QTextBrowser()
         self.text.setText(self.licenseText)
 
-        windowLayout.addWidget(self.text)
+        window_layout.addWidget(self.text)
 
-        self.setLayout(windowLayout)
+        self.setLayout(window_layout)
 
 
