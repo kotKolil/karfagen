@@ -1,6 +1,7 @@
 from src.GUI.panels.navigationTopPanel import *
 from src.GUI.panels.bottomNavigationPanel import *
 from src.GUI.widgets.textLabel import *
+from src.etc.LangClass import *
 
 from PyQt5.Qt import *
 
@@ -18,6 +19,7 @@ class bookViewer(QApplication):
         self.numOfPages = 1
         self.appStyle = self.appConfig.APP_THEME_CSS
         self.pageNumber = 0
+        self.langPackage = langClass(app_config.langCode)
 
         # creating and configuring bookViewer window
         self.content = QWidget()
@@ -26,8 +28,8 @@ class bookViewer(QApplication):
         self.content.resize(0, 0)
         self.content.setFixedWidth(self.appConfig.WINDOW_WIDTH)
         self.content.setFixedHeight(self.appConfig.WINDOW_HEIGHT)
-        self.content.setWindowIcon(QIcon("./assets/karfagen.png"))
-        self.content.setWindowTitle(f"Karfagen Book reader")
+        self.content.setWindowIcon(QIcon("/assets/karfagen.png"))
+        self.content.setWindowTitle(self.langPackage.lang.winTitle)
         self.content.setStyleSheet(self.appStyle)
         self.appFont = QFont(self.appConfig.FONT_NAME, self.appConfig.TEXT_SIZE)
         self.setFont(self.appFont)

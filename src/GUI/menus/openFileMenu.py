@@ -9,11 +9,11 @@ class openFileMenu(QMenu):
         self.app = app
         self.recentFilesParser = Recentfilesparser()
 
-        openFile = QAction("&open file", self.app)
+        openFile = QAction("&" + self.app.langPackage.lang.openFileButton, self.app)
         openFile.triggered.connect(self.openFileFunc)
 
         recentFilesClass = recentFilesMenu(self.app)
-        recentFiles = QAction("&recent files", self.app)
+        recentFiles = QAction("&"  + self.app.langPackage.lang.recentFiles, self.app)
         recentFiles.setMenu(recentFilesClass)
 
         self.addAction(openFile)

@@ -1,0 +1,29 @@
+{
+  "winTitle": "Karfagen - fb2 books reader",
+  "openFile" : "file",
+  "info": "info",
+  "settings": "settings",
+  "openFileButton": "open file",
+  "recentFiles": "recent files",
+  "lastFiles": "last files",
+  "windowWidth": "window width",
+  "windowHeight": "windows height",
+  "opacityIs": "opacity",
+  "textSize": "window sizes",
+  "fontSize": "font size",
+  "fontType": "font type",
+  "appStyle": "app style",
+  "appTheme": "app theme",
+  "appThemes": {
+    "white": "white",
+    "dark": "dark",
+    "console": "console",
+    "sepia": "sepia"
+  },
+  "about": "about programm",
+  "readme": "readme",
+  "credits": "author",
+  "applySettingsButton": "save settings",
+  "pageByNumberPlaceholder": "enter the page number for a quick transition",
+  "langType": "select language"
+}

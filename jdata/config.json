@@ -6,5 +6,6 @@
     "APP_THEME": "white",
     "WINDOW_WIDTH": 666,
     "WINDOW_HEIGHT": 666,
-    "OPACITY_WINDOWS": 0.9
+    "OPACITY_WINDOWS": 1.0,
+    "langCode": "en"
 }

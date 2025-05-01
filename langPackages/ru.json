@@ -1,0 +1,29 @@
+{
+  "winTitle": "Karfagen - читалка fb2 книг",
+  "openFile" : "файл",
+  "info": "инфо",
+  "settings": "настройки",
+  "openFileButton": "открыть файл",
+  "recentFiles": "недавние файлы",
+  "lastFiles": "последние файлы",
+  "windowWidth": "ширина окна",
+  "windowHeight": "высота окна",
+  "opacityIs": "прозрачность",
+  "textSize": "размер окна",
+  "fontSize": "размер шрифта",
+  "fontType": "тип шрифта",
+  "appStyle": "стиль приложения",
+  "appTheme": "тема приложения",
+  "appThemes": {
+    "white": "светлая",
+    "dark": "темная",
+    "console": "консоль",
+    "sepia": "сепия"
+  },
+  "about": "о программе",
+  "readme": "прочти меня",
+  "credits": "автор",
+  "applySettingsButton": "сохранить настройки",
+  "pageByNumberPlaceholder": "введите номер страницы для быстрого перехода",
+  "langType": "выберите язык"
+}

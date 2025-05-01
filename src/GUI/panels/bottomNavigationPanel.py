@@ -26,7 +26,7 @@ class bottomNavigationPanel(QWidget):
 
         self.goToPageField = QLineEdit()
         self.goToPageField.setValidator(QIntValidator())
-        self.goToPageField.setPlaceholderText("Enter number of page to go")
+        self.goToPageField.setPlaceholderText(self.app.langPackage.lang.pageByNumberPlaceholder)
         self.goToPageField.setStyleSheet("""
             QLineEdit {
                 border: 0px black solid;
