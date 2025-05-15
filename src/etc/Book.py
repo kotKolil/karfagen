@@ -62,7 +62,7 @@ class Book(object):
                     image.width
                 new_height = int(self.app.appConfig.WINDOW_HEIGHT * 0.7) if image.height >=  self.app.appConfig.WINDOW_HEIGHT else \
                     image.height
-                resized_image = image.resize((new_width, new_height))
+                resized_image = image.resize((new_height, new_width))
 
                 # Save the resized image
                 resized_image.save(os.path.join("images", f'{imgId}.jpg'))
@@ -93,15 +93,21 @@ class Book(object):
         page = []
         current_text_height = 0
         font_metrics = QFontMetrics(self.app.appFont)
-
+        print(self.text_data)
         for paragraph in self.text_data:
 
+            if "img" in paragraph:
+                page.append(paragraph)
+                pages.append(page)
+                page = []
+                continue
 
             # Split paragraph into lines that fit
 
             paragraph = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + paragraph + "<br>"
             lines = self.split_paragraph_into_lines(paragraph, font_metrics, self.app.textLabel.width())
             for line in lines:
+
                 line_height = font_metrics.height()  # Use actual line height
 
                 if current_text_height + line_height <= self.app.textLabel.height() - 30:
@@ -116,6 +122,7 @@ class Book(object):
         if page:
             pages.append(page)
 
+        print(pages)
         return pages
     def split_paragraph_into_lines(self, paragraph: str, font_metrics: QFontMetrics, max_width: int):
         """
