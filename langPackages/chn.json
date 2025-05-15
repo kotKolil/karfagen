@@ -1,0 +1,29 @@
+{
+  "winTitle": "Karfagen - FB2电子书阅读器",
+  "openFile": "文件",
+  "info": "信息",
+  "settings": "设置",
+  "openFileButton": "打开文件",
+  "recentFiles": "最近文件",
+  "lastFiles": "最近文件",
+  "windowWidth": "窗口宽度",
+  "windowHeight": "窗口高度",
+  "opacityIs": "透明度",
+  "textSize": "窗口大小",
+  "fontSize": "字体大小",
+  "fontType": "字体类型",
+  "appStyle": "应用样式",
+  "appTheme": "应用主题",
+  "appThemes": {
+    "white": "浅色",
+    "dark": "深色",
+    "console": "控制台",
+    "sepia": "棕褐色"
+  },
+  "about": "关于程序",
+  "readme": "自述文件",
+  "credits": "作者",
+  "applySettingsButton": "保存设置",
+  "pageByNumberPlaceholder": "输入页码快速跳转",
+  "langType": "选择语言"
+}

@@ -2,10 +2,10 @@
     "WINDOW_NAME": "Karfagen",
     "TEXT_SIZE": 13,
     "FONT_NAME": "Trebuchet MS",
-    "WINDOW_STYLE": "windowsvista",
-    "APP_THEME": "white",
+    "WINDOW_STYLE": "Windows",
+    "APP_THEME": "console",
     "WINDOW_WIDTH": 666,
     "WINDOW_HEIGHT": 666,
-    "OPACITY_WINDOWS": 1.0,
-    "langCode": "en"
+    "OPACITY_WINDOWS": 0.9,
+    "langCode": "ru"
 }

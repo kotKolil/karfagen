@@ -1,5 +1,6 @@
 from src.GUI.panels.navigationTopPanel import *
 from src.GUI.panels.bottomNavigationPanel import *
+from src.GUI.panels.windowHeadPanel import *
 from src.GUI.widgets.textLabel import *
 from src.etc.LangClass import *
 
@@ -23,6 +24,7 @@ class bookViewer(QApplication):
 
         # creating and configuring bookViewer window
         self.content = QWidget()
+        self.content.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint )
         self.content.setWindowOpacity(self.appConfig.OPACITY_WINDOWS)
         self.content.setStyleSheet(app_config.APP_THEME_CSS)
         self.content.resize(0, 0)
@@ -35,7 +37,10 @@ class bookViewer(QApplication):
         self.setFont(self.appFont)
         self.text_height = QFontMetrics(self.appFont)
 
+        self.windowsHead = windowHead(self)
         self.layout = QVBoxLayout(self.content)
+
+        self.layout.addWidget(self.windowsHead)
 
         self.layout.addWidget(navigationTopPanel(self))
 
@@ -67,7 +72,7 @@ class bookViewer(QApplication):
         for url in event.mimeData().urls():
             file_path = url.toLocalFile()
             if file_path.endswith(('.txt', '.epub', '.fb2')):
-                print("cock")
+                print("ok")
         event.acceptProposedAction()
 
 
