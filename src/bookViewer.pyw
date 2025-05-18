@@ -44,7 +44,7 @@ class bookViewer(QApplication):
 
         self.layout.addWidget(navigationTopPanel(self))
 
-        self.textLabel = textLabel(self).textLabel
+        self.textLabel = TextLabel(self)
         self.layout.addWidget(self.textLabel)
 
         self.navigationBottomPanel = bottomNavigationPanel(self)
@@ -67,12 +67,3 @@ class bookViewer(QApplication):
             self.navigationBottomPanel.navigationSlider.setValue(pageNumber)
             self.pageNumber = pageNumber
             self.render_page(pageNumber - 1)
-
-    def dropEvent(self, event):
-        for url in event.mimeData().urls():
-            file_path = url.toLocalFile()
-            if file_path.endswith(('.txt', '.epub', '.fb2')):
-                print("ok")
-        event.acceptProposedAction()
-
-

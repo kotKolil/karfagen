@@ -54,24 +54,21 @@ class Book(object):
             if tag.getAttribute("id") == imgId:
                 binStr = base64.b64decode(tag.childNodes[0].nodeValue)
                 imgId = random.randint(10**5+1, 10**6)
-                with open(os.path.join("images", f'{imgId}.jpg'), 'x') as file:
-                    file.close()
+                img_path = os.path.join("images", f'{imgId}.jpg')
+
+                # Создаем директорию, если её нет
+                os.makedirs("images", exist_ok=True)
+
+                # Сохраняем изображение
                 buf = io.BytesIO(binStr)
                 image = Image.open(buf)
-                new_width = int(self.app.appConfig.WINDOW_WIDTH * 0.7) if image.width >=  self.app.appConfig.WINDOW_WIDTH else \
-                    image.width
-                new_height = int(self.app.appConfig.WINDOW_HEIGHT * 0.7) if image.height >=  self.app.appConfig.WINDOW_HEIGHT else \
-                    image.height
-                resized_image = image.resize((new_height, new_width))
+                new_width = int(self.app.appConfig.WINDOW_WIDTH * 0.7) if image.width >= self.app.appConfig.WINDOW_WIDTH else image.width
+                new_height = int(self.app.appConfig.WINDOW_HEIGHT * 0.7) if image.height >= self.app.appConfig.WINDOW_HEIGHT else image.height
+                resized_image = image.resize((new_width, new_height))
+                resized_image.save(img_path)
 
-                # Save the resized image
-                resized_image.save(os.path.join("images", f'{imgId}.jpg'))
-                # with open(os.path.join("images", f'{imgId}.jpg'), 'wb') as file:
-                #     file.write(binStr)
-                #     file.close()
+                return f"<img src='{img_path}' style='max-width: 100%; max-height: 100%;' />"
 
-                # with open( f'/images/{imgId}.jpg', "wb") as file:
-                return f"<img src = '{os.path.join( "images",  f'{imgId}.jpg' )}' />"
     def loadTagValueFromXML(self, tag_name):
         try:
             tag = self.document.getElementsByTagName(tag_name)[0].childNodes[0].nodeValue
@@ -82,33 +79,28 @@ class Book(object):
 
 
     def parseBookData(self):
-        """
-        Parses raw book data into pages, handling paragraph wrapping and page breaks.
-
-        Returns:
-            A list of pages, where each page is a list of strings (paragraphs/lines).
-        """
-
-        pages= []
+        pages = []
         page = []
         current_text_height = 0
         font_metrics = QFontMetrics(self.app.appFont)
-        print(self.text_data)
-        for paragraph in self.text_data:
 
-            if "img" in paragraph:
-                page.append(paragraph)
-                pages.append(page)
-                page = []
+        for paragraph in self.text_data:
+            if isinstance(paragraph, str) and "img" in paragraph:
+                # Если текущая страница не пуста, добавляем её в pages
+                if page:
+                    pages.append(page)
+                    page = []
+                    current_text_height = 0
+                # Добавляем изображение как отдельную страницу
+                pages.append([paragraph])
                 continue
 
-            # Split paragraph into lines that fit
-
+            # Обработка текстовых параграфов
             paragraph = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + paragraph + "<br>"
             lines = self.split_paragraph_into_lines(paragraph, font_metrics, self.app.textLabel.width())
-            for line in lines:
 
-                line_height = font_metrics.height()  # Use actual line height
+            for line in lines:
+                line_height = font_metrics.height()
 
                 if current_text_height + line_height <= self.app.textLabel.height() - 30:
                     page.append(line)
@@ -116,13 +108,12 @@ class Book(object):
                 else:
                     pages.append(page)
                     page = [line]
-                    current_text_height = line_height  # Reset height to the current line's height
+                    current_text_height = line_height
 
-        # Add the last page if it's not empty
+        # Добавляем последнюю страницу, если она не пуста
         if page:
             pages.append(page)
 
-        print(pages)
         return pages
     def split_paragraph_into_lines(self, paragraph: str, font_metrics: QFontMetrics, max_width: int):
         """

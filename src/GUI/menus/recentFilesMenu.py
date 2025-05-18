@@ -20,7 +20,6 @@ class recentFilesMenu(QMenu):
                 self.addAction(ii)
 
     def openFile(self, filename):
-        print(filename)
         self.app.Book = Book(filename=filename, encoding="UTF-8", app=self.app)
         self.app.Book.parses()
         self.app.content.setWindowTitle("Karfagen Book Viewer")

@@ -29,6 +29,8 @@ class openFileMenu(QMenu):
                                                 "Fiction Book 2 (*.fb2);;All Files (*)",
                                                 options=options)
         if files:
+            print(files[0])
+            print(type(files[0]))
             self.app.Book = Book(filename = files[0], encoding = "UTF-8" ,app = self.app)
             self.app.Book.parses()
             self.app.content.setWindowTitle(

@@ -1,10 +1,14 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QMimeData
+
 
 class windowHead(QToolBar):
     def __init__(self, app):
         super().__init__()
         self.app = app
+
+        # Включаем прием Drag and Drop
+        self.setAcceptDrops(True)  # <-- Важно!
 
         container = QWidget()
         self.layout = QHBoxLayout(container)
@@ -27,6 +31,8 @@ class windowHead(QToolBar):
         self.setMovable(False)
         self.setFloatable(False)
         self.setFixedHeight(30)
+        self.setMovable(True)
+
 
     def close_window(self):
-        1/0
+        self.app.content.close()
